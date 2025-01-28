@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Home Shop",
-    "slug": "HomeShop",
+    "name": "Home Shop Practice",
+    "slug": "homeshoppractice",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alirezatalebizadeh.HomeShop"
     },
     "web": {
       "bundler": "metro",
@@ -49,6 +50,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "007bca89-49a1-4878-95f2-ca11eba3a511"
+      }
+    },
+    "owner": "alirezatalebizadeh"
   }
 }

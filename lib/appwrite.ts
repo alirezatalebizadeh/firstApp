@@ -67,7 +67,7 @@ export async function login() {
 
     return true;
   } catch (error) {
-    console.error(`خطا در فرآیند ورود: ${error.message}`);
+    console.error(`خطا در فرآیند ورود: ${error}`);
     return false;
   }
 }

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native'
 import React from 'react'
 import icons from '@/constants/icons'
 import images from '@/constants/images'
@@ -28,18 +28,21 @@ const SettingIcons = ({ icon, title, onPress, textStyle, showArrow = true }: Set
             onPress={handleRedirect}
             className='flex flex-row items-center justify-between py-3'>
             <View >
-                <TouchableOpacity className='flex flex-row items-center gap-3' onPress={handleRedirect}><Image source={icon}
-                    className='size-6'
-                />
+                <TouchableOpacity className='flex flex-row items-center gap-3' onPress={handleRedirect}>
+                    <Image source={icon}
+                        className='size-6'
+                    />
                     <Text className={`text-lg font-rubik-medium text-black-300  ${textStyle}`}>{title}</Text>
                 </TouchableOpacity>
             </View>
             {showArrow &&
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleRedirect}
+                >
                     <Image
                         source={icons.rightArrow}
                         className='size-5'
-                    /></TouchableOpacity>
+                    />
+                </TouchableOpacity>
             }
         </TouchableOpacity>
     )
@@ -57,7 +60,7 @@ const Profile = () => {
         console.log('redirect');
     }
     const handleLogout = () => {
-        router.push("/")
+        router.push("/sign-in")
     }
 
     return (

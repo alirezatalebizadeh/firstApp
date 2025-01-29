@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, Button, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
-import { Link, useLocalSearchParams } from 'expo-router'
+import { Link, router, useLocalSearchParams } from 'expo-router'
 import images from '@/constants/images'
 import icons from '@/constants/icons'
 import Search from '@/components/ui/Search'
@@ -36,52 +36,32 @@ const Explore = () => {
                 //! Header component => First Component in List
                 ListHeaderComponent={() => (
                     <View className="px-5">
-                        <View>
-                            <View className='flex flex-row items-center
-             justify-between mt-5'>
-                                <View className='flex flex-row items-center'>
-                                    <Image
-                                        source={images.avatar}
-                                        className='size-12 rounded-full'
-                                    />
-                                    <View className='flex flex-col items-start justify-center ml-2'>
-                                        <Text className='text-xs font-rubik text-black-100'>Good Morning</Text>
-                                        <Text className='text-base font-rubik-medium text-black-100'>Alireza Talebizadeh</Text>
-                                    </View>
-                                </View>
-                                <Image source={icons.bell} className='size-6' />
-                            </View>
-                        </View>
+                        <View className="flex flex-row items-center justify-between mt-5">
+                            <TouchableOpacity
+                                onPress={() => router.back()}
+                                className="flex flex-row bg-primary-200 rounded-full size-11 items-center justify-center"
+                            >
+                                <Image source={icons.backArrow} className="size-5" />
+                            </TouchableOpacity>
 
+                            <Text className="text-base mr-2 text-center font-rubik-medium text-black-300">
+                                Search for Your Ideal Home
+                            </Text>
+                            <Image source={icons.bell} className="w-6 h-6" />
+                        </View>
                         {/* //! Search Components */}
                         <Search />
 
-                        {/* //! Featured */}
-                        <TopComponents title='Featured' />
-
-                        <FlatList data={featuredCards}
-                            renderItem={({ item }) => <FeturedCard onPress={() => handleCardPress()} item={item} />}
-                            keyExtractor={(item, index) => index.toString()}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerClassName='flex gap-5 mt-5'
-                            ListEmptyComponent={
-                                featuredCards.length > 0 ? (<ActivityIndicator size="large" className="text-primary-300 mt-5" />) :
-                                    (<NoResults />)
-                            }
-                        />
-
-                        {/* //!Recommendation */}
-                        <TopComponents title="Our Recommendation" />
-                        {/* //! Filter search */}
-                        <Filter />
+                        <View className="mt-5">
+                            <Text className="text-xl font-rubik-bold text-black-300 mt-5">
+                                Found  {featuredCards?.length} Properties
+                            </Text>
+                        </View>
                     </View>
                 )}
             />
-
         </SafeAreaView>
     );
-
 }
 
 export default Explore

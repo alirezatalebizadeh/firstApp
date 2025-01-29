@@ -14,6 +14,7 @@ const Filter = () => {
       router.setParams({ filter: "" })
       return;
     }
+    console.log(selectedCategory);
 
     console.log(params.filter);
 

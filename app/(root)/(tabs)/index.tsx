@@ -26,12 +26,11 @@ export default function Index() {
           <Card item={item} onPress={() => handleCardPress(item)} />
         )}
         keyExtractor={(item) => item.toString()}
-        contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-5 mt-5"
+        contentContainerClassName="pb-32  "
+        columnWrapperClassName="flex gap-5 mt-5 "
         numColumns={2}
-
         ListEmptyComponent={
-          loading ? (<ActivityIndicator size="large" className="text-primary-300 mt-5" />) :
+          cards.length > 0 ? (<ActivityIndicator size="large" className="text-primary-300 mt-5" />) :
             (<NoResults />)
         }
         //! Header component => First Component in List
@@ -66,6 +65,10 @@ export default function Index() {
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerClassName='flex gap-5 mt-5'
+              ListEmptyComponent={
+                featuredCards.length > 0 ? (<ActivityIndicator size="large" className="text-primary-300 mt-5" />) :
+                  (<NoResults />)
+              }
             />
 
             {/* //!Recommendation */}
@@ -75,7 +78,6 @@ export default function Index() {
           </View>
         )}
       />
-
     </SafeAreaView>
   );
-}
+};

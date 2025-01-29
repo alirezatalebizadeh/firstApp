@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import icons from '@/constants/icons'
 import images from '@/constants/images'
 
@@ -18,13 +18,19 @@ interface Props {
 }
 
 export const FeturedCard = ({ item, onPress }: Props) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const onHeartPress = () => {
+        setIsFavorite(!isFavorite);
+    };
+
     return (
         <TouchableOpacity
             onPress={onPress}
-            className='flex flex-col items-start w-60 h-80 relative'
+            className='flex flex-col items-start w-60 h-80 relative overflow-hidden'
         >
             <View className='w-full h-full'>
-                <Image source={item.image} className='size-full rounded-2xl' />
+                <Image source={item.image} className='size-full rounded-2xl' resizeMode='cover' />
                 <Image source={images.cardGradient} className='size-full rounded-2xl absolute bottom-0' />
 
                 <View className='flex flex-row items-center bg-white/90 px-3 py-1.5 rounded-full absolute top-5 right-5'>
@@ -44,7 +50,13 @@ export const FeturedCard = ({ item, onPress }: Props) => {
                         <Text className='text-xl font-rubik-extrabold text-white'>
                             ${item.price}
                         </Text>
-                        <Image source={icons.heart} className='size-5' />
+                        <TouchableOpacity onPress={onHeartPress}>
+                            <Image
+                                source={icons.heart}
+                                className="size-5"
+                                tintColor={isFavorite ? 'red' : ''}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -54,13 +66,19 @@ export const FeturedCard = ({ item, onPress }: Props) => {
 
 
 const Card = ({ onPress, item }: Props) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const onHeartPress = () => {
+        setIsFavorite(!isFavorite);
+    };
+
     return (
-        <TouchableOpacity onPress={onPress} className='flex-1 w-full mt-4 px-3 py-4 rounded-lg bg-white shadow-lg shadow-black-100/70 relative'>
+        <TouchableOpacity onPress={onPress} className='flex-1 w-full mt-4 px-3 py-4 rounded-lg bg-white shadow-lg shadow-black-100/70 relative overflow-hidden'>
             <View className='flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50'>
                 <Image source={icons.star} className='size-2.5' />
                 <Text className='text-xs font-rubik-bold text-primary-300 ml-0.5'>{item.rating}</Text>
             </View>
-            <Image source={images.newYork} className='w-full h-40 rounded-lg' />
+            <Image source={images.newYork} className='w-full h-40 rounded-lg' resizeMode='cover' />
             {/* //!Bottom Of Card */}
             <View className='flex flex-col mt-2'>
                 <Text className="text-base font-rubik-bold text-black-300">
@@ -74,11 +92,14 @@ const Card = ({ onPress, item }: Props) => {
                 <Text className="text-base font-rubik-bold text-primary-300">
                     ${item.price}
                 </Text>
-                <Image
-                    source={icons.heart}
-                    className="w-5 h-5 mr-2"
-                    tintColor="#191D31"
-                />
+                <TouchableOpacity onPress={onHeartPress}>
+                    <Image
+                        source={icons.heart}
+                        className="w-5 h-5 mr-2"
+                        tintColor={isFavorite ? 'red' : 'gray'}
+                    />
+                </TouchableOpacity>
+
             </View>
         </TouchableOpacity>
     )

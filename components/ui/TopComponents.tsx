@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Link } from 'expo-router'
 
 const TopComponents = ({ title }: { title: string }) => {
     return (
@@ -8,7 +9,7 @@ const TopComponents = ({ title }: { title: string }) => {
                 <Text className='text-xl font-rubik-bold text-black-300'>{title}</Text>
                 <TouchableOpacity>
                     <Text className='text-base font-rubik-bold text-primary-300'>
-                        See all
+                        <Link href="/explore"> See all</Link>
                     </Text>
                 </TouchableOpacity>
             </View>

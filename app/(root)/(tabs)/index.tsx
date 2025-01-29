@@ -7,26 +7,21 @@ import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { getLatestProperties } from "@/lib/appwrite";
 import { useAppwrite } from "@/lib/useAppwrite";
-import { Link } from "expo-router";
+import { cards, featuredCards } from "@/constants/data";
 import { ActivityIndicator, FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+
 
 export default function Index() {
   const { data: latestProperties, loading } = useAppwrite({ fn: getLatestProperties })
-
 
   const handleCardPress = ({ }) => {
     console.log("click in card");
   }
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <SafeAreaView className="bg-white h-full px-2"
     >
-      <FlatList data={[1, 2, 3, 4, 5, 6, 7, 8]}
+      <FlatList data={cards}
         renderItem={({ item }) => (
           <Card item={item} onPress={() => handleCardPress(item)} />
         )}
@@ -42,7 +37,7 @@ export default function Index() {
         //! Header component => First Component in List
         ListHeaderComponent={() => (
           <View className="px-5">
-            <View className='px-5'>
+            <View>
               <View className='flex flex-row items-center
              justify-between mt-5'>
                 <View className='flex flex-row items-center'>
@@ -65,9 +60,9 @@ export default function Index() {
             {/* //! Featured */}
             <TopComponents title='Featured' />
 
-            <FlatList data={[9, 10, 11, 12, 13, 14]}
-              renderItem={({ item }) => <FeturedCard item={item} />}
-              keyExtractor={(item) => item.toString()}
+            <FlatList data={featuredCards}
+              renderItem={({ item }) => <FeturedCard onPress={() => handleCardPress(item)} item={item} />}
+              keyExtractor={(item, index) => index.toString()}
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerClassName='flex gap-5 mt-5'
@@ -77,7 +72,6 @@ export default function Index() {
             <TopComponents title="Our Recommendation" />
             {/* //! Filter search */}
             <Filter />
-
           </View>
         )}
       />

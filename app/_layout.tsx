@@ -1,10 +1,22 @@
-import { SplashScreen, Stack } from "expo-router";
+import { Stack } from "expo-router";
+import * as SplashScreen from 'expo-splash-screen';
 import "./global.css"
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
+import GlobalProvider from "@/lib/global-provider";
+import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import 'react-native-reanimated';
+import { useColorScheme } from '@/hooks/useColorScheme';
+
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 
 export default function RootLayout() {
+  const ColorScheme = useColorScheme();
+
   const [fontsLoaded] = useFonts({
     "Rubik-Bold": require("../assets/fonts/Rubik-Bold.ttf"),
     "Rubik-ExtraBold": require("../assets/fonts/Rubik-ExtraBold.ttf"),
@@ -25,5 +37,10 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return <GlobalProvider>
+    <ThemeProvider value={ColorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack screenOptions={{ headerShown: false }} />
+      <StatusBar style="auto" />
+    </ThemeProvider>
+  </GlobalProvider>;
 }

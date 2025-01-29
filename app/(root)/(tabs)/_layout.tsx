@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, ImageSourcePropType } from 'react-native'
 import { Tabs } from 'expo-router'
 import React from 'react'
 import icons from '@/constants/icons'
@@ -70,4 +70,4 @@ const TabsLayout = () => {
     )
 }
 
-export default Tabs
+export default TabsLayout
